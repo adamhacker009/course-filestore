@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ThreadCreateRequest extends FormRequest
+class PassChangeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,13 +22,17 @@ class ThreadCreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|min:3',
-            'body' => 'nullable|string',
+            'current_password' => 'required',
+            'new_password' => 'required|min:8|max:255',
         ];
     }
-    public function messages(): array{
+    public function messages(): array
+    {
         return [
-            'title.required'=>'Title is required',
+            'current_password.required' => 'Current Password is required',
+            'new_password.required' => 'New Password is required',
+            'new_password.min' => 'New Password must be at least 8 characters',
+            'new_password.max' => 'New Password must be less than 255 characters',
         ];
     }
 }

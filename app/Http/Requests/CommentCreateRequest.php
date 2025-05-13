@@ -11,7 +11,7 @@ class CommentCreateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,17 @@ class CommentCreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'body' => 'required|string|min:1',
+            'thread_id' => 'required|integer|exists:threads,id',
+            'comment_parent_id'=> 'sometimes|integer|exists:comments,id',
+        ];
+    }
+    public function messages(): array{
+        return [
+            'body.required'=> 'Comment text is required',
+            'body.min'=> 'Comment text must be at least 1 character',
+            'thread_id.required'=> 'Thread is required',
+            'thread_id.integer'=> 'Thread must be an integer',
         ];
     }
 }

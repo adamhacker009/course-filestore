@@ -63,7 +63,7 @@ class User extends Authenticatable
         return ['token' => $token];
     }
 
-    public static function changePassword(array $data)
+    public function changePassword(array $data)
     {
         if(!Hash::check($data['current_password'], $this->password)){
             throw new Exception("Wrong password", 401);
@@ -77,14 +77,9 @@ class User extends Authenticatable
         $this->save();
     }
 
-    public static function deleteUser(bool $delete)
+    public function deleteUser(bool $delete)
     {
-        switch ($delete){
-            case true:
-                $this->delete();
-            case false:
-                throw new Exception("You didnt agree to delete your account", 403);
-        }
+        $this->delete();
     }
     protected $casts = [
         'email_verified_at' => 'datetime',

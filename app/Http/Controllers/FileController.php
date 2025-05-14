@@ -46,10 +46,8 @@ class FileController extends Controller
         return response()->json([$files],200);
     }
 
-    public function download(Request $request,int $id)
+    public function download(Request $request, File $file)
     {
-        $file = File::findOrFail($id);
-
         try {
             return $file->download($request->user());
         } catch (Exception $e){

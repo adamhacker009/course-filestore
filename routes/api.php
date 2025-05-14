@@ -18,6 +18,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::post('/register', [UserController::class, 'register']);
+Route::post('/login', [UserController::class, 'login']);
+
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/logout', [UserController::class, 'logout']);
     Route::post('/change-password', [UserController::class, 'changePassword']);
@@ -31,10 +34,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/files/{file}/threads', [ThreadController::class, 'newThreads']);
     Route::delete('/thread/{id}', [ThreadController::class, 'deleteThread']);
     Route::post('/comments', [CommentController::class, 'publish']);
-    Route::put('/comments/{id}', [CommentController::class, 'update']);
+    Route::put('/comments/{comment}', [CommentController::class, 'update']);
     Route::delete('/comments/{id}', [CommentController::class, 'delete']);
     Route::get('/comments/{id}', [CommentController::class, 'getComments']);
 });
-
-Route::post('/register', [UserController::class, 'register']);
-Route::post('/login', [UserController::class, 'login']);

@@ -51,7 +51,7 @@ class FileController extends Controller
         try {
             return $file->download($request->user());
         } catch (Exception $e){
-            return response()->json(['error' => $e->getMessage()],$e->getStatusCode());
+            return response()->json(['error' => $e->getMessage()],$e->getCode());
         }
     }
 
@@ -62,7 +62,7 @@ class FileController extends Controller
         try{
             $file->filedelete($request->user());
         }catch (Exception $e){
-            return response()->json(['error' => $e->getMessage()],$e->getStatusCode());
+            return response()->json(['error' => $e->getMessage()],$e->getCode());
         }
 
         return response()->json(['message'=>'File deleted'],200);

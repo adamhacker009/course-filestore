@@ -22,7 +22,7 @@ class ThreadController extends Controller
                 'title' => $thread->title,
                 'created_at' => $thread->created_at,]);
         } catch(Exception $e) {
-            return response()->json(['error' => $e->getMessage()]);
+            return response()->json(['error' => $e->getMessage()], $e->getCode());
         }
     }
 
@@ -36,7 +36,7 @@ class ThreadController extends Controller
                 $threads
             );
         } catch (Exception $e) {
-            return response()->json(['error' => $e->getMessage()]);
+            return response()->json(['error' => $e->getMessage()], $e->getCode());
         }
     }
     public function deleteThread(Request $request, int $threadId)
@@ -47,7 +47,7 @@ class ThreadController extends Controller
             $thread->deleteThread($request->user());
             return response()->json(['message' => 'Thread deleted']);
         } catch (Exception $e) {
-            return response()->json(['error' => $e->getMessage()]);
+            return response()->json(['error' => $e->getMessage()], $e->getCode());
         }
     }
 }

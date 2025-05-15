@@ -38,7 +38,7 @@ class Comment extends Model
     }
 
     public function deleteComment(User $user){
-        if($user->id !== $this->user_id){
+        if($user->id !== $this->user_id && !$user->isAdmin()){
             throw new Exception("You are not the author");
         }
         $this->delete();

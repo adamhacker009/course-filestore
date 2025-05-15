@@ -7,6 +7,7 @@ use App\Http\Requests\PassChangeRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Throwable;
 
 class UserController extends Controller
 {
@@ -60,5 +61,17 @@ class UserController extends Controller
         $request->user()->deleteUser();
 
         return response()->json(["message" => "User deleted successfully"], 200);
+    }
+
+    public function promote(Request $request,int $id)
+    {
+        $target = User::findOrFail($id);
+
+        try {
+            $target->makeAdmin($request->user());
+            return response()->json(['message' => 'User promoted successfully'], 200);
+        } catch (Throwable $th) {
+            return response()->json(['message' => $th->getCode()]);
+        }
     }
 }

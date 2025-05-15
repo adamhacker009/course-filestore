@@ -23,6 +23,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'is_admin',
     ];
 
     /**
@@ -43,7 +44,7 @@ class User extends Authenticatable
 
         $token = $user->createToken('default')->plainTextToken;
 
-        return ["user" => $user, "token" => $token];
+        return ["token" => $token];
     }
 
     public static function Auth(array $data):array
@@ -80,6 +81,21 @@ class User extends Authenticatable
     public function deleteUser(bool $delete)
     {
         $this->delete();
+    }
+
+    public function makeAdmin(User $currentUser)
+    {
+        if (!$currentUser->isAdmin()){
+            throw new Exception("User is not admin", 403);
+        }
+
+        $this->is_admin = true;
+        $this->save();
+    }
+
+    public function isAdmin():bool
+    {
+        return (bool) $this->is_admin;
     }
     protected $casts = [
         'email_verified_at' => 'datetime',

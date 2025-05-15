@@ -51,7 +51,7 @@ class Thread extends Model
 
     public function deleteThread(User $user)
     {
-        if($this->created_by !== $user->id && $this->file->user_id !== $user->id){
+        if($this->created_by !== $user->id && $this->file->user_id !== $user->id && !$user->isAdmin()){
             throw new Exception("You cannot delete this thread", 500);
         }
 

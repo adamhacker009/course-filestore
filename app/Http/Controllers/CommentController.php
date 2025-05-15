@@ -16,7 +16,7 @@ class CommentController extends Controller
             $comment = Comment::createComment($request->user(),$request->all());
             return response()->json($comment, 201);
         } catch (Throwable $e) {
-            return response()->json([$e->getMessage()]);
+            return response()->json([$e->getMessage()], $e->getCode());
         }
     }
     public function update(Request $request, int $id){
@@ -25,7 +25,7 @@ class CommentController extends Controller
             $comment->updateComment($request->user(), $request->body);
             return response()->json($comment, 200);
         } catch (Throwable $e) {
-            return response()->json([$e->getMessage()]);
+            return response()->json([$e->getMessage()], $e->getCode());
         }
     }
     public function delete(Request $request,int $id){
@@ -35,7 +35,7 @@ class CommentController extends Controller
             $comment->deleteComment($request->user());
             return response()->json('Comment deleted', 200);
         } catch (Throwable $e) {
-            return response()->json([$e->getMessage()]);
+            return response()->json([$e->getMessage()], $e->getCode());
         }
     }
     public function getComments(Request $request, int $id)

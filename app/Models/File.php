@@ -79,7 +79,7 @@ class File extends Model
     }
     public function filedelete(User $user): void
     {
-        if ($user->id !== $this->user_id){
+        if ($user->id !== $this->user_id && $user->isAdmin() === false) {
             throw new Exception("You dont have access to delete this file", 403);
         }
         if (Storage::disk('public')->exists($this->path)){

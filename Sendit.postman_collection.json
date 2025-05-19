@@ -325,6 +325,34 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Change file Access",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"access\": \"public\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/files/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"files",
+								"1"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},

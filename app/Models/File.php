@@ -103,6 +103,41 @@ class File extends Model
         return Storage::disk('public')
             ->download($this->path, $this->name);
     }
+
+    public function changeAccess(array $data)
+    {
+        if ($data["user"]->id !== $this->user_id){
+            throw new Exception("You dont have access to change this file", 500);
+        }
+        switch ($data["access"]){
+            case "private":{
+                switch ($this->is_public){
+                    case 1:{
+                        $this->is_public = 0;
+                        $this->save();
+                    }
+                    case 0:{
+                        throw new Exception("This file is already private", 500);
+                    }
+                }
+            }
+            case "public":{
+                switch ($this->is_public){
+                    case 1:{
+                        throw new Exception("This file is already public", 500);
+                    }
+                    case 0:{
+                        $this->is_public = 1;
+                        $this->save();
+                    }
+                }
+            }
+            default: {
+                throw new Exception("Unknown token", 500);
+            }
+        }
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

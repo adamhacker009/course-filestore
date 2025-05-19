@@ -67,4 +67,16 @@ class FileController extends Controller
 
         return response()->json(['message'=>'File deleted'],200);
     }
+
+    public function changeFileAccess(Request $request,int $file)
+    {
+        $file=File::findOrFail($file);
+        $data=["user"=>$request->user(), "access"=>$request->only("access")];
+        try {
+            $file->changeAccess($data);
+        } catch (Exception $e){
+            return response()->json(['error' => $e->getMessage()],$e->getCode());
+        }
+        return response()->json(['message'=>'File access changed'],200);
+    }
 }

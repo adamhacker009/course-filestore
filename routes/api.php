@@ -29,6 +29,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/files/public', [FileController::class, 'indexPublic']);
     Route::get('/files/private', [FileController::class, 'indexUser']);
     Route::get('/files/{file}', [FileController::class, 'download']);
+    Route::put('/files/{file}', [FileController::class, 'changeFileAccess']);
     Route::delete('/files/{file}', [FileController::class, 'delete']);
     Route::post('/files/{file}/thread', [ThreadController::class, 'createThread']);
     Route::get('/files/{file}/threads', [ThreadController::class, 'newThreads']);

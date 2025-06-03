@@ -7,6 +7,7 @@ use App\Http\Requests\PassChangeRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Mockery\Exception;
 use Throwable;
 
 class UserController extends Controller
@@ -34,6 +35,18 @@ class UserController extends Controller
             "data" => ['token' => $token]
         ], 200);
 
+    }
+
+    public function getUsers(Request $request)
+    {
+        if (!$request->user()->is_admin) {
+            throw new Exception("Unauthorized", 401);
+        }
+        try {
+            return response()->json(["data" => User::all()]);
+        } catch (Throwable $th) {
+            return response()->json(['error' => $th->getMessage()],$th->getCode());
+        }
     }
 
     public function logout(Request $request)

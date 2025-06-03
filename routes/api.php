@@ -26,6 +26,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/change-password', [UserController::class, 'changePassword']);
     Route::post("/delete-account", [UserController::class, 'deleteAccount']);
     Route::post("/upload-file", [FileController::class, 'upload']);
+    Route::get("/file/{id}", [FileController::class, 'getFile']);
     Route::get('/files/public', [FileController::class, 'indexPublic']);
     Route::get('/files/private', [FileController::class, 'indexUser']);
     Route::get('/files/{file}', [FileController::class, 'download']);

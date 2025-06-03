@@ -55,6 +55,19 @@ class FileController extends Controller
         }
     }
 
+    public function getFile(Request $request, int $id):JsonResponse
+    {
+        $file = File::findOrFail($id);
+        try {
+            if(!$file->is_public && $file->user_id !== $request->user()->id){
+                throw new Exception("You are not the owner of this file", 403);
+            }
+            return response()->json(["data"=>$file]);
+        } catch (Exception $e){
+            return response()->json(['error' => $e->getMessage()],$e->getCode());
+        }
+    }
+
     public function delete(Request $request,int $id)
     {
         $file=File::findOrFail($id);

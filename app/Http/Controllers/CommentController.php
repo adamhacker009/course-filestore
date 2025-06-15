@@ -33,7 +33,7 @@ class CommentController extends Controller
 
         try{
             $comment->deleteComment($request->user());
-            return response()->json('Comment deleted', 200);
+            return response()->json(["message" => "comment was removed"], 200);
         } catch (Throwable $e) {
             return response()->json([$e->getMessage()], $e->getCode());
         }

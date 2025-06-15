@@ -99,6 +99,25 @@ class File extends Model
         return Storage::disk('public')
             ->download($this->path, $this->name);
     }
+
+    public function access(string $access, User $user)
+    {
+        if (!$this->is_public && $user->id !== $this->user_id) {
+            throw new Exception("You don't have permission to modify this file", 403);
+        }
+
+        if (!in_array($access, ['public', 'private'])) {
+            throw new Exception("Invalid access value", 400);
+        }
+
+        if (($access === 'private' && !$this->is_public) ||
+            ($access === 'public' && $this->is_public)) {
+            throw new Exception("File is already $access", 400);
+        }
+
+        $this->is_public = ($access === 'public');
+        $this->save();
+    }
     public function user()
     {
         return $this->belongsTo(User::class);

@@ -42,10 +42,6 @@ class File extends Model
 
     public function url()
     {
-        if(!$this->is_public){
-            return null;
-        }
-
         return Storage::disk('public')->url($this->path);
     }
 

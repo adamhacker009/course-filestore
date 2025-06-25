@@ -2,8 +2,10 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
@@ -29,6 +31,12 @@ class Handler extends ExceptionHandler
             //
         });
     }
+
+    protected function unauthenticated($request, AuthenticationException $exception)
+    {
+        return response()->json(['error' => 'Unauthorized.'], 401);
+    }
+
     public function render($request, Throwable $exception){
             if($exception instanceof ModelNotFoundException){
                 return response()->json([
@@ -40,6 +48,9 @@ class Handler extends ExceptionHandler
                     'error'=>'Endpoint not found'
                 ],404);
             }
+        if ($exception instanceof AuthenticationException) {
+            return $this->unauthenticated($request, $exception);
+        }
         return parent::render($request, $exception);
     }
 }

@@ -67,6 +67,24 @@ class FileController extends Controller
             return response()->json(['error' => $e->getMessage()],$e->getCode());
         }
     }
+
+    public function change(Request $request, int $id):JsonResponse
+    {
+        $file = File::findOrFail($id);
+        try {
+            if(!$file->is_public && $file->user_id !== $request->user()->id){
+                throw new Exception("You are not the owner of this file", 403);
+            }
+            $file->name = $request->name;
+            $file->save();
+        } catch (Exception $e){
+            return response()->json(['error' => $e->getMessage()],$e->getCode());
+        }
+        return response()->json([
+            'success'=>true,
+            'message'=>'Renamed'
+        ],200);
+    }
     public function changeFileAccess(Request $request, int $id)
     {
         $file=File::findOrFail($id);

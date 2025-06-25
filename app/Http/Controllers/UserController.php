@@ -21,7 +21,7 @@ class UserController extends Controller
         return response()->json([
             'message' => 'User registered successfully',
             "data" => ['token' => $token]
-        ], 201);
+        ], 200);
     }
 
     public function login(AuthRequest $request)

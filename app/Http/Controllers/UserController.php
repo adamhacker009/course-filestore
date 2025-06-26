@@ -28,7 +28,11 @@ class UserController extends Controller
     {
         $data = $request->only('email', 'password');
 
-        ['token' => $token] = User::Auth($data);
+        try {
+            ['token' => $token] = User::Auth($data);
+        } catch (Throwable $th) {
+            return response()->json(['error' => $th->getMessage()],$th->getCode());
+        }
 
         return response()->json([
             'message' => 'User login successfully',

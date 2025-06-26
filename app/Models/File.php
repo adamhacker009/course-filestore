@@ -63,6 +63,7 @@ class File extends Model
     }
     public static function latestForUser(User $user, int $limit = 40)
     {
+
         return self::where('user_id', $user->id)->latest('created_at')->limit($limit)->get()
             ->map(function (self $file) {
                 return [

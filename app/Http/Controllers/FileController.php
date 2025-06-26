@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\changeNameRequest;
 use App\Http\Requests\FileSendRequest;
 use App\Models\File;
 use Exception;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -36,12 +38,17 @@ class FileController extends Controller
 
     public function indexPublic():JsonResponse
     {
+
         $files=File::latestPublicInfo();
         return response()->json([$files],200);
     }
 
     public function indexUser(Request $request):JsonResponse
     {
+        if(!$request->user()){
+            throw new Exception("Unauthorized.", 401);
+        }
+
         $files=File::latestForUser($request->user());
         return response()->json([$files],200);
     }
@@ -68,13 +75,15 @@ class FileController extends Controller
         }
     }
 
-    public function change(Request $request, int $id):JsonResponse
+    public function change(changeNameRequest $request, int $id):JsonResponse
     {
+
         $file = File::findOrFail($id);
         try {
             if(!$file->is_public && $file->user_id !== $request->user()->id){
-                throw new Exception("You are not the owner of this file", 403);
+                throw new Exception('Forbidden.', 403);
             }
+
             $file->name = $request->name;
             $file->save();
         } catch (Exception $e){

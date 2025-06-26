@@ -1,0 +1,534 @@
+{
+	"id": "afca6258-f9a9-4818-b448-a9f31d5951f5",
+	"name": "FileStore API Tests",
+	"timestamp": "2025-06-26T16:55:22.498Z",
+	"collection_id": "40160778-d216255b-8079-47d6-acf3-ee8364490ab7",
+	"folder_id": 0,
+	"environment_id": "40160778-0fe1145f-c04a-4b6f-8716-fd18f512fc4b",
+	"totalPass": 27,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2025-06-26T16:54:22.969Z",
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "e68e02cd-88e4-4cbb-bbaf-a1f5ada48934",
+			"name": "Register",
+			"url": "http://localhost:9000/api/register",
+			"time": 8125,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status 201 Created": true,
+				"Response has token": true,
+				"Content-Type is application/json": true
+			},
+			"testPassFailCounts": {
+				"Status 201 Created": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response has token": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Content-Type is application/json": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				8125
+			],
+			"allTests": [
+				{
+					"Status 201 Created": true,
+					"Response has token": true,
+					"Content-Type is application/json": true
+				}
+			]
+		},
+		{
+			"id": "fe04c9bc-9127-41e6-98d8-44e9320a3a4e",
+			"name": "Login",
+			"url": "http://localhost:9000/api/login",
+			"time": 6710,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Response has token": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response has token": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				6710
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Response has token": true
+				}
+			]
+		},
+		{
+			"id": "9e49d69a-bbff-4de7-ad1b-5b5c9d6fc87e",
+			"name": "Logout",
+			"url": "http://localhost:9000/api/logout",
+			"time": 3646,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				3646
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "7042d181-7a32-48ca-8c39-c0d6251a0a57",
+			"name": "Get User Files",
+			"url": "http://localhost:9000/api/files/private",
+			"time": 3584,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Response is array": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response is array": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				3584
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Response is array": true
+				}
+			]
+		},
+		{
+			"id": "0dc6db98-d22a-40e8-9cca-d11d4db88596",
+			"name": "Rename File",
+			"url": "http://localhost:9000/api/files/4",
+			"time": 7429,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"File name updated": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"File name updated": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				7429
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"File name updated": true
+				}
+			]
+		},
+		{
+			"id": "ab656039-fa2d-48f5-9a05-57b38a4deee9",
+			"name": "Register - Invalid data",
+			"url": "http://localhost:9000/api/register",
+			"time": 2873,
+			"responseCode": {
+				"code": 422,
+				"name": "Unprocessable Content"
+			},
+			"tests": {
+				"Status 422": true,
+				"Validation errors": true
+			},
+			"testPassFailCounts": {
+				"Status 422": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Validation errors": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				2873
+			],
+			"allTests": [
+				{
+					"Status 422": true,
+					"Validation errors": true
+				}
+			]
+		},
+		{
+			"id": "55a7c255-b585-4a92-ab36-034ca8ca90ee",
+			"name": "Login - Invalid Credentials",
+			"url": "http://localhost:9000/api/login",
+			"time": 3476,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Status 404": true,
+				"Error message": true
+			},
+			"testPassFailCounts": {
+				"Status 404": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Error message": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				3476
+			],
+			"allTests": [
+				{
+					"Status 404": true,
+					"Error message": true
+				}
+			]
+		},
+		{
+			"id": "7c72d3d6-2e35-4562-b070-dc4f1d0dc28d",
+			"name": "Login - Invalid Password",
+			"url": "http://localhost:9000/api/login",
+			"time": 3668,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized"
+			},
+			"tests": {
+				"Status 401": true,
+				"Error message": true
+			},
+			"testPassFailCounts": {
+				"Status 401": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Error message": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				3668
+			],
+			"allTests": [
+				{
+					"Status 401": true,
+					"Error message": true
+				}
+			]
+		},
+		{
+			"id": "4df4be3b-0568-4162-815c-4a886dea7e2a",
+			"name": "Logout - Invalid Token",
+			"url": "http://localhost:9000/api/logout",
+			"time": 2911,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized"
+			},
+			"tests": {
+				"Status 401": true,
+				"Unauthenticated error": true
+			},
+			"testPassFailCounts": {
+				"Status 401": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Unauthenticated error": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				2911
+			],
+			"allTests": [
+				{
+					"Status 401": true,
+					"Unauthenticated error": true
+				}
+			]
+		},
+		{
+			"id": "958d21b1-c25a-4969-a9fa-34dddfbe39fe",
+			"name": "Get Files - Unauthorized",
+			"url": "http://localhost:9000/api/files/private",
+			"time": 2667,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized"
+			},
+			"tests": {
+				"Status 401": true
+			},
+			"testPassFailCounts": {
+				"Status 401": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				2667
+			],
+			"allTests": [
+				{
+					"Status 401": true
+				}
+			]
+		},
+		{
+			"id": "ec060385-9688-489b-a3a9-697530d325a3",
+			"name": "Rename File - Not Found",
+			"url": "http://localhost:9000/api/files/999999",
+			"time": 3433,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Status 404": true,
+				"Not found message": true
+			},
+			"testPassFailCounts": {
+				"Status 404": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Not found message": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				3433
+			],
+			"allTests": [
+				{
+					"Status 404": true,
+					"Not found message": true
+				}
+			]
+		},
+		{
+			"id": "8d0d07af-7a43-4f28-8388-cc588afd0046",
+			"name": "Rename File - Empty Name",
+			"url": "http://localhost:9000/api/files/3",
+			"time": 3407,
+			"responseCode": {
+				"code": 422,
+				"name": "Unprocessable Content"
+			},
+			"tests": {
+				"Status 422": true,
+				"Name validation error": true
+			},
+			"testPassFailCounts": {
+				"Status 422": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Name validation error": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				3407
+			],
+			"allTests": [
+				{
+					"Status 422": true,
+					"Name validation error": true
+				}
+			]
+		},
+		{
+			"id": "814bc4e7-8e41-4be7-9736-d8ca671bc914",
+			"name": "Rename File - Forbidden",
+			"url": "http://localhost:9000/api/files/1",
+			"time": 3613,
+			"responseCode": {
+				"code": 403,
+				"name": "Forbidden"
+			},
+			"tests": {
+				"Status 403": true,
+				"Forbidden message": true
+			},
+			"testPassFailCounts": {
+				"Status 403": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Forbidden message": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				3613
+			],
+			"allTests": [
+				{
+					"Status 403": true,
+					"Forbidden message": true
+				}
+			]
+		},
+		{
+			"id": "fde0b6ad-3f18-42cd-aa3a-b04063531a49",
+			"name": "Rename File - Unauthorized",
+			"url": "http://localhost:9000/api/files/1",
+			"time": 2536,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized"
+			},
+			"tests": {
+				"Status 401": true,
+				"Forbidden message": true
+			},
+			"testPassFailCounts": {
+				"Status 401": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Forbidden message": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				2536
+			],
+			"allTests": [
+				{
+					"Status 401": true,
+					"Forbidden message": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 58078,
+	"collection": {
+		"requests": [
+			{
+				"id": "e68e02cd-88e4-4cbb-bbaf-a1f5ada48934",
+				"method": "POST"
+			},
+			{
+				"id": "fe04c9bc-9127-41e6-98d8-44e9320a3a4e",
+				"method": "POST"
+			},
+			{
+				"id": "9e49d69a-bbff-4de7-ad1b-5b5c9d6fc87e",
+				"method": "GET"
+			},
+			{
+				"id": "7042d181-7a32-48ca-8c39-c0d6251a0a57",
+				"method": "GET"
+			},
+			{
+				"id": "0dc6db98-d22a-40e8-9cca-d11d4db88596",
+				"method": "PATCH"
+			},
+			{
+				"id": "ab656039-fa2d-48f5-9a05-57b38a4deee9",
+				"method": "POST"
+			},
+			{
+				"id": "55a7c255-b585-4a92-ab36-034ca8ca90ee",
+				"method": "POST"
+			},
+			{
+				"id": "7c72d3d6-2e35-4562-b070-dc4f1d0dc28d",
+				"method": "POST"
+			},
+			{
+				"id": "4df4be3b-0568-4162-815c-4a886dea7e2a",
+				"method": "GET"
+			},
+			{
+				"id": "958d21b1-c25a-4969-a9fa-34dddfbe39fe",
+				"method": "GET"
+			},
+			{
+				"id": "ec060385-9688-489b-a3a9-697530d325a3",
+				"method": "PATCH"
+			},
+			{
+				"id": "8d0d07af-7a43-4f28-8388-cc588afd0046",
+				"method": "PATCH"
+			},
+			{
+				"id": "814bc4e7-8e41-4be7-9736-d8ca671bc914",
+				"method": "PATCH"
+			},
+			{
+				"id": "fde0b6ad-3f18-42cd-aa3a-b04063531a49",
+				"method": "PATCH"
+			}
+		]
+	}
+}
